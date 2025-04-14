@@ -1,37 +1,29 @@
-import java.util.*;
-
-public class Deck {
-    private List<Card> cards;
-
-    public Deck() {
-        cards = new ArrayList<>();
-        setDefaultDeck();
-    }
-
-    private void setDefaultDeck() {
-        cards.add(new Fighter());
-        cards.add(new Fighter());
-        cards.add(new ShieldBearer());
-        cards.add(new ShieldBearer());
-        cards.add(new Healer());
-    }
-
-    public void shuffle() {
-        Collections.shuffle(cards);
-        System.out.println("Deck shuffled!");
-    }
-
-    public Card drawCard() {
+public void deal(int numCards) {
+    Random rand = new Random();
+    for (int i = 0; i < numCards; i++) {
         if (!cards.isEmpty()) {
-            return cards.remove(0);
-        }
-        return null;
-    }
-
-    public void showDeck() {
-        for (Card card : cards) {
+            Card card = cards.get(rand.nextInt(cards.size()));
             card.display();
         }
     }
 }
 
+public Card getCardFromHand(int index) {
+    if (index >= 0 && index < cards.size()) {
+        return cards.get(index);
+    }
+    return null;
+}
+
+public void discard(int index) {
+    if (index >= 0 && index < cards.size()) {
+        cards.remove(index);
+    }
+}
+
+public void showHand() {
+    System.out.println("\nYour Hand:");
+    for (int i = 0; i < cards.size(); i++) {
+        System.out.println(i + ": " + cards.get(i).getName());
+    }
+}

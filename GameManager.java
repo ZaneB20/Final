@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class GameManager {
     private Deck deck;
     private Character player;
@@ -7,7 +9,7 @@ public class GameManager {
     public GameManager() {
         deck = new Deck();
         player = new Character("Hero", 20);
-        enemy = new Enemy(); // First enemy
+        enemy = new Enemy(); // First random enemy
         scanner = new Scanner(System.in);
     }
 
@@ -33,9 +35,8 @@ public class GameManager {
 
             if (enemy.isDefeated()) {
                 System.out.println("\nYou defeated " + enemy.getName() + "!");
-                Enemy.nextEnemy();
                 if (!Enemy.allEnemiesDefeated()) {
-                    enemy = new Enemy(); // Spawn the next enemy
+                    enemy = new Enemy(); // Spawn a new random enemy
                 } else {
                     break; // Win condition met!
                 }
